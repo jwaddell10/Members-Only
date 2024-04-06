@@ -1,0 +1,97 @@
+const mongoose = require("mongoose");
+const Message = require("./models/message");
+const User = require("./models/user");
+const message = require("./models/message");
+const user = require("./models/user");
+require("dotenv").config();
+
+const messages = [];
+const users = [];
+
+main().catch((err) => console.log(err));
+
+async function main() {
+	const mongoDB = process.env.MONGODB_KEY;
+	const db = mongoose.connection;
+	db.on("error", console.error.bind(console, "mongo connection error"));
+
+	await mongoose.connect(mongoDB);
+	console.log("Should be connected");
+
+	await Promise.all([Message.deleteMany(), User.deleteMany()]);
+	await createMessages();
+	await createUsers();
+}
+
+async function messageCreate(index, title, date, messageText, user) {
+	const newMessage = {
+		title: title,
+		date: date,
+		messageText: messageText,
+		user: user,
+	};
+
+	const message = new Message(newMessage);
+	console.log(message, "this is message to save");
+
+	await message.save();
+	messages[index] = message;
+	console.log(messages, "this is messages");
+}
+
+async function userCreate(index, firstName, lastName, email, password, status) {
+	const newUser = {
+		firstName: firstName,
+		lastName: lastName,
+		email: email,
+		password: password,
+		status: status,
+	};
+
+	const user = new User(newUser);
+	console.log(user, "this is user to save");
+
+	await user.save();
+	users[index] = user;
+	console.log(users, "this is users");
+}
+
+async function createMessages() {
+	await Promise.all([
+		messageCreate(
+			0,
+			"Message Title",
+            new Date("2024-04-05"),
+			"message from jonathan, hello!",
+			users[0]
+		),
+		messageCreate(
+			1,
+			"Another Message Title",
+            new Date("2024-04-06"),
+			"another message from jonathan, hello world",
+			users[1]
+		),
+	]);
+}
+
+async function createUsers() {
+	await Promise.all([
+		userCreate(
+			0,
+			"Jonathan",
+			"Doe",
+			"jondoe@gmail.com",
+			"1234password",
+			true
+		),
+		userCreate(
+			1,
+			"Brian",
+			"Smith",
+			"bsmith@gmail.com",
+			"anotherpassword",
+			true
+		),
+	]);
+}
