@@ -10,7 +10,6 @@ const LocalStrategy = require("passport-local").Strategy;
 const Schema = mongoose.schema;
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
-
 const app = express();
 
 // view engine setup
