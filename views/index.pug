@@ -5,11 +5,11 @@ block content
     h1= title
     div.button-group
       button.log-in(type='submit') Log in
-      button.sign-up(type='submit') Sign up
+      button.sign-up(onClick="location.href='/sign-up'") Sign up
 
   div.homepage-group
     h1="You must be logged in to Chatter"
     div.homepage-button-group
-      button.log-in(type='submit') Log in
-      button.sign-up(type='submit') Sign up
+      button.log-in() Log in
+      button.sign-up(onClick="location.href='/sign-up'") Sign up
 

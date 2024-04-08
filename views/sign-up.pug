@@ -1,6 +1,13 @@
 extends layout 
 
-block content 
+block content
+    div.navbar-group
+        a(href="/")
+            h1="ChatterZone"
+        div.button-group
+            button.log-in(type='submit') Log in
+            button.sign-up(type='submit') Sign up
+
     div.sign-up-form
         h1=title
         form(method="POST")
