@@ -105,3 +105,11 @@ h1 {
   background-color: #EA4C89;
   color: #FFFFFF;
 }
+
+.login-form {
+  border: 1px solid white;
+  border-radius: 10px;
+  padding-bottom: 5px;
+  max-width: 300px;
+  margin: 0 auto;
+}
