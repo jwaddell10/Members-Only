@@ -11,27 +11,16 @@ exports.user_create_get = asyncHandler(async (req, res, next) => {
 	});
 });
 
-exports.user_create_post = 
-    // console.log('is this running? post'),
-    // body("username")
-    //     .trim()
-    //     .isLength({min: 1})
-    //     .escape(),
-    // body("password")
-    //     .trim()
-    //     .isLength({ min: 1 })
-    //     .escape(),
-
-	asyncHandler(async (req, res, next) => {
-		//need values from the form, need to sanitize them
-		// body("username") "password" "password"
-		console.log(req.body, "this is reqbody");
-		try {
-			const user = new User({
-				userName: req.body.username,
-				password: req.body.password,
-			});
-		} catch {
-			console.log("this is caught");
-		}
-	});
+exports.user_create_post = asyncHandler(async (req, res, next) => {
+	//need values from the form, need to sanitize them
+	// body("username") "password" "password"
+	console.log(req.body, "this is reqbody");
+	try {
+		const user = new User({
+			username: req.body.username,
+			password: req.body.password,
+		});
+	} catch {
+		console.log("this is caught");
+	}
+});
