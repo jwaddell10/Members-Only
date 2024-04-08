@@ -1,12 +1,71 @@
 body {
-  padding: 50px;
-  font: 14px "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: 12px "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
   background-color: #222222;
 }
 
 a {
   color: #00B7FF;
 }
+
+button {
+  display: flex;
+  justify-content: center;
+  border-radius: 0.5rem;
+  border-style: none;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  height: 40px;
+  padding: 10px 16px;
+}
+
+/*navbar at top of home page */
+.navbar-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+}
+
+/* body of home page */
+
+.homepage-group {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.homepage-button-group {
+  display: flex;
+  gap: 10px;
+}
+
+/* log-in button on navbar */
+
+.log-in {
+  background-color: #EA4C89;
+  color: #FFFFFF;
+}
+
+.sign-up {
+  background-color: #222222;
+  border: 1px solid #EA4C89;
+  color: #EA4C89;
+}
+
+/*sign-up form styles*/
 
 .sign-up-form {
   border: 1px solid white;
@@ -34,24 +93,10 @@ h1 {
   justify-content: center;
 }
 
+
+/*button on sign-up form*/
 .button {
   display: flex;
   justify-content: center;
   margin: 1rem;
-}
-
-button {
-  display: flex;
-  justify-content: center;
-  background-color: #EA4C89;
-  border-radius: 8rem;
-  border-style: none;
-  color: #FFFFFF;
-  cursor: pointer;
-  display: inline-block;
-  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  height: 40px;
-  padding: 10px 16px;
 }
