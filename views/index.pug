@@ -2,7 +2,8 @@ extends layout
 
 block content
   div.navbar-group
-    h1= title
+    a(href="/")
+      h1= title
     div.button-group
       button.log-in(type='submit') Log in
       button.sign-up(onClick="location.href='/sign-up'") Sign up
