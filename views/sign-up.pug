@@ -1,21 +1,20 @@
 extends layout 
 
 block content 
-    h1=title
-    form(method="POST")
+    div.sign-up-form
+        h1=title
+        form(method="POST")
         div.form-group
-            label(for="firstName") First Name: 
-            input(type="text" name="firstName" required)
-            //- first name, last name, email, password, status
+            label(for="username") Username: 
+        div.input-group
+            input(type="text" name="username" required)
         div.form-group
-            label(for="lastName") Last Name: 
-            input(type="text" name="lastName" required)
-        div.form-group
-            label(for="email") Email: 
-            input(type="email" name="email" required)
-        div.form-group
-            label(for="email") Password: 
+            label(for="password") Password: 
+        div.input-group
             input(type="password" name="password" required)
         div.form-group
-            label(for="email") Confirm Password: 
-            input(type="password" name="password" required)       
+            label(for="password") Confirm Password: 
+        div.input-group
+            input(type="password" name="password" required)
+        div.button     
+            button.btn-primary(type='submit') Sign Up
