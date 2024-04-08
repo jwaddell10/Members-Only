@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 const Message = require("./models/message");
 const User = require("./models/user");
-const message = require("./models/message");
-const user = require("./models/user");
 require("dotenv").config();
 
 const messages = [];
@@ -39,13 +37,10 @@ async function messageCreate(index, title, date, messageText, user) {
 	console.log(messages, "this is messages");
 }
 
-async function userCreate(index, firstName, lastName, email, password, status) {
+async function userCreate(index, username, password) {
 	const newUser = {
-		firstName: firstName,
-		lastName: lastName,
-		email: email,
+		username: username,
 		password: password,
-		status: status,
 	};
 
 	const user = new User(newUser);
@@ -79,19 +74,13 @@ async function createUsers() {
 	await Promise.all([
 		userCreate(
 			0,
-			"Jonathan",
-			"Doe",
-			"jondoe@gmail.com",
+			"Anon",
 			"1234password",
-			true
 		),
 		userCreate(
 			1,
-			"Brian",
-			"Smith",
-			"bsmith@gmail.com",
+			"Anon",
 			"anotherpassword",
-			true
 		),
 	]);
 }
