@@ -11,8 +11,19 @@ const Schema = mongoose.schema;
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const User = require("./models/user");
+require("dotenv").config();
 const app = express();
 
+main().catch((err) => console.log(err));
+
+async function main() {
+	const mongoDB = process.env.MONGODB_KEY;
+	const db = mongoose.connection;
+	db.on("error", console.error.bind(console, "mongo connection error"));
+
+	await mongoose.connect(mongoDB);
+	console.log("Should be connected");
+}
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
@@ -57,7 +68,6 @@ passport.use(
 				// passwords do not match!
 				return done(null, false, { message: "Incorrect password" });
 			}
-
 			return done(null, user);
 		} catch (err) {
 			return done(err);
