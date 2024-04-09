@@ -2,6 +2,7 @@ const { body, validationResult } = require("express-validator");
 const asyncHandler = require("express-async-handler");
 const passport = require("passport");
 const bcrypt = require("bcryptjs");
+const LocalStrategy = require("passport-local").Strategy;
 const Message = require("../models/message");
 const User = require("../models/user");
 
@@ -16,19 +17,48 @@ exports.loginPost = [
 	body("username").trim().isLength({ min: 1 }).escape(),
 	body("password").trim().isLength({ min: 1 }).escape(),
 
-    asyncHandler(async (req, res, next) => {
-        console.log(req.body, 'this is req body')
-        try {
-            const errors = validationResult(req);
+	asyncHandler(async (req, res, next) => {
+		console.log(req.body, "this is req body");
 
-            passport.authenticate("local", {
-                successRedirect: "/",
-                failureRedirect: "/",
-            })
-        } catch {
+		const errors = validationResult(errors);
 
-        }
-    })
+		if (!errors.isEmpty()) {
+			res.render("login", {
+				title: "Login",
+			});
+		} else {
+			passport.use(
+				new LocalStrategy(async (username, password, done) => {
+					try {
+						const user = await User.findOne({ username: username });
+						if (!user) {
+							return done(null, false, {
+								message: "Incorrect username",
+							});
+						}
+						const match = await bcrypt.compare(
+							password,
+							user.password
+						);
+						if (!match) {
+							// passwords do not match!
+							return done(null, false, {
+								message: "Incorrect password",
+							});
+						}
+
+						passport.authenticate("local", {
+							successRedirect: "/",
+							failureRedirect: "/",
+						});
+						return done(null, user);
+					} catch (err) {
+						return done(err);
+					}
+				})
+			);
+		}
+	}),
 ];
 
 exports.signupGet = asyncHandler(async (req, res, next) => {
