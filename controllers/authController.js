@@ -18,7 +18,6 @@ exports.loginPost = [
 
 	asyncHandler(async (req, res, next) => {
 		console.log(req.body, "this is req body");
-		console.log(res, "this is res locals");
 		//find one user who's
 
 		passport.authenticate("local", {
@@ -57,10 +56,12 @@ exports.signupPost = [
 		})
 		.escape(),
 
-	//check if username exists, encrypt password
 	asyncHandler(async (req, res, next) => {
 		try {
 			bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
+				if (!err.isEmpty()) {
+					throw new Error("User could not be created");
+				}
 				const user = new User({
 					username: req.body.username,
 					password: hashedPassword,
