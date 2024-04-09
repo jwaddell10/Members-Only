@@ -5,7 +5,7 @@ block content
         a(href="/")
             h1="ChatterZone"
         div.button-group
-            button.log-in(onClick="location.href='/login") Log in
+            button.log-in(onClick="location.href='/login'") Log in
             button.sign-up(onClick="location.href='/signup'") Sign up
 
     div.login-form
@@ -19,9 +19,5 @@ block content
                 label(for="password") Password: 
             div.input-group
                 input(type="password" name="password" required)
-            div.form-group
-                label(for="password") Confirm Password: 
-            div.input-group
-                input(type="password" name="passwordConfirmation" required)
             div.button
                 button.btn-primary(type='submit') Log in

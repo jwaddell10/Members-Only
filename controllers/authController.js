@@ -11,7 +11,25 @@ exports.loginGet = asyncHandler(async (req, res, next) => {
 	});
 });
 
-exports.loginPost = [];
+exports.loginPost = [
+	//sanitize and check data, see if user exists,
+	body("username").trim().isLength({ min: 1 }).escape(),
+	body("password").trim().isLength({ min: 1 }).escape(),
+
+    asyncHandler(async (req, res, next) => {
+        console.log(req.body, 'this is req body')
+        try {
+            const errors = validationResult(req);
+
+            passport.authenticate("local", {
+                successRedirect: "/",
+                failureRedirect: "/",
+            })
+        } catch {
+
+        }
+    })
+];
 
 exports.signupGet = asyncHandler(async (req, res, next) => {
 	res.render("signup", {
