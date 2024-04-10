@@ -2,14 +2,16 @@ extends layout
 
 block content
   div.navbar-group
-    h1= title
+    a(href="/")
+      h1= title
     div.button-group
-      button.log-in(type='submit') Log in
-      button.sign-up(onClick="location.href='/sign-up'") Sign up
+      button.log-in(onClick="location.href='/login'") Log in
+      button.sign-up(onClick="location.href='/signup'") Sign up
 
   div.homepage-group
-    h1="You must be logged in to Chatter"
+    h1 You must be logged in to Chatter
     div.homepage-button-group
-      button.log-in() Log in
-      button.sign-up(onClick="location.href='/sign-up'") Sign up
+      button.log-in(onClick="location.href='/login'") Log in
+      button.sign-up(onClick="location.href='/signup'") Sign up
+
 
