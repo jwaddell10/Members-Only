@@ -8,9 +8,10 @@ block content
             button.log-in(onClick="location.href='/login'") Log in
             button.sign-up(onClick="location.href='/signup'") Sign up
     if user 
-        h1 Welcome Back #{user}
-        a(href="/logout")
-            p Log Out
+        h1 Welcome Back #{user.username}!
+        a.log-out(href="/logout")
+        div.flexjustifycenter
+            button.log-out Log Out
     else
         div.login-form
             h1=title
@@ -27,4 +28,4 @@ block content
                     button.btn-primary(type='submit') Log in
 
             if failureMessage
-                p=failureMessage
+                p.failureMessage=failureMessage

@@ -11,6 +11,11 @@ p {
   color: white;
 }
 
+.flexjustifycenter {
+  display: flex;
+  justify-content: center;
+}
+
 button {
   display: flex;
   justify-content: center;
@@ -59,6 +64,11 @@ button {
 /* log-in button on navbar */
 
 .log-in {
+  background-color: #EA4C89;
+  color: #FFFFFF;
+}
+
+.log-out {
   background-color: #EA4C89;
   color: #FFFFFF;
 }
