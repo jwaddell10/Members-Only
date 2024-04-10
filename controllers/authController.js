@@ -15,39 +15,38 @@ exports.loginGet = asyncHandler(async (req, res, next) => {
 });
 
 exports.loginPost = [
-	body("username").trim().isLength({ min: 1 }).escape(),
-	body("password").trim().isLength({ min: 1 }).escape(),
+    body("username").trim().isLength({ min: 1 }).escape(),
+    body("password").trim().isLength({ min: 1 }).escape(),
 
-	asyncHandler(async (req, res, next) => {
-		passport.use(
-			new LocalStrategy(async (username, password, done) => {
-				try {
-					const user = await User.findOne({ username: username });
-					if (!user) {
-						return done(null, false, {
-							message: "Incorrect username",
-						});
-					}
-					const match = await bcrypt.compare(password, user.password);
-					if (!match) {
-						// passwords do not match!
-						return done(null, false, {
-							message: "Incorrect password",
-						});
-					}
-					return done(null, user);
-				} catch (err) {
-					return done(err);
-				}
-			})
-		);
+    asyncHandler(async (req, res, next) => {
+        const errors = validationResult(req);
 
-		passport.authenticate("local", {
-			successRedirect: "/",
-			failureRedirect: "/",
-		});
-	}),
+        if (!errors.isEmpty()) {
+            // If there are validation errors, render the login page with error messages
+            res.render("login", { username: req.body.username, errors: errors.array() });
+            return;
+        }
+
+        passport.authenticate("local", (err, user, info) => {
+            if (err) {
+                return next(err);
+            }
+            if (!user) {
+                // If authentication fails, redirect to the login page with a flash message
+                return res.render('login', { title: "Login", user: req.user, failureMessage: info.message });
+            }
+
+            req.login(user, (err) => {
+                if (err) {
+                    return next(err);
+                }
+                // Successful login, redirect to a dashboard or home page
+                return res.redirect("/login");
+            });
+        })(req, res, next);
+    }),
 ];
+
 
 exports.signupGet = asyncHandler(async (req, res, next) => {
 	res.render("signup", {
@@ -81,7 +80,7 @@ exports.signupPost = [
 	asyncHandler(async (req, res, next) => {
 		try {
 			bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
-				if (!err.isEmpty()) {
+				if (err) {
 					throw new Error("User could not be created");
 				}
 				const user = new User({

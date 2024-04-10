@@ -7,6 +7,10 @@ a {
   text-decoration: none;
 }
 
+p {
+  color: white;
+}
+
 button {
   display: flex;
   justify-content: center;
@@ -93,7 +97,6 @@ h1 {
   justify-content: center;
 }
 
-
 /*button on sign-up form*/
 .button {
   display: flex;
@@ -112,4 +115,8 @@ h1 {
   padding-bottom: 5px;
   max-width: 300px;
   margin: 0 auto;
+}
+body > div.login-form > p {
+  display: flex;
+  justify-content: center;
 }

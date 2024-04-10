@@ -8,7 +8,7 @@ block content
             button.log-in(onClick="location.href='/login'") Log in
             button.sign-up(onClick="location.href='/signup'") Sign up
     if user 
-        h1 Welcome Back #{user.username}
+        h1 Welcome Back #{user}
         a(href="/logout")
             p Log Out
     else
@@ -25,3 +25,6 @@ block content
                     input(type="password" name="password" required)
                 div.button
                     button.btn-primary(type='submit') Log in
+
+            if failureMessage
+                p=failureMessage
