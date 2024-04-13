@@ -15,38 +15,54 @@ exports.loginGet = asyncHandler(async (req, res, next) => {
 });
 
 exports.loginPost = [
-    body("username").trim().isLength({ min: 1 }).escape(),
-    body("password").trim().isLength({ min: 1 }).escape(),
+	body("username").trim().isLength({ min: 1 }).escape(),
+	body("password").trim().isLength({ min: 1 }).escape(),
 
-    asyncHandler(async (req, res, next) => {
-        const errors = validationResult(req);
+	asyncHandler(async (req, res, next) => {
+		const errors = validationResult(req);
 
-        if (!errors.isEmpty()) {
-            // If there are validation errors, render the login page with error messages
-            res.render("login", { username: req.body.username, errors: errors.array() });
-            return;
-        }
+		if (!errors.isEmpty()) {
+			// If there are validation errors, render the login page with error messages
+			res.render("login", {
+				username: req.body.username,
+				errors: errors.array(),
+			});
+			return;
+		}
 
-        passport.authenticate("local", (err, user, info) => {
-            if (err) {
-                return next(err);
-            }
-            if (!user) {
-                // If authentication fails, redirect to the login page with a flash message
-                return res.render('login', { title: "Login", user: req.user, failureMessage: info.message });
-            }
+		passport.authenticate("local", (err, user, info) => {
+			if (err) {
+				return next(err);
+			}
+			if (!user) {
+				// If authentication fails, redirect to the login page with a flash message
+				return res.render("login", {
+					title: "Login",
+					user: req.user,
+					failureMessage: info.message,
+				});
+			}
 
-            req.login(user, (err) => {
-                if (err) {
-                    return next(err);
-                }
-                // Successful login, redirect to a dashboard or home page
-                return res.redirect("/login");
-            });
-        })(req, res, next);
-    }),
+			req.login(user, (err) => {
+				if (err) {
+					return next(err);
+				}
+				// Successful login, redirect to a dashboard or home page
+				return res.redirect("/login");
+			});
+		})(req, res, next);
+	}),
 ];
 
+exports.logout = (req, res, next) => {
+    console.log('is this running?')
+    req.logout((err) => {
+      if (err) {
+        return next(err);
+      }
+      res.redirect('/');
+    });
+  };
 
 exports.signupGet = asyncHandler(async (req, res, next) => {
 	res.render("signup", {

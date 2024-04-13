@@ -9,9 +9,8 @@ block content
             button.sign-up(onClick="location.href='/signup'") Sign up
     if user 
         h1 Welcome Back #{user.username}!
-        a.log-out(href="/logout")
         div.flexjustifycenter
-            button.log-out Log Out
+            button.log-out(onClick="location.href='/logout'") Log Out
     else
         div.login-form
             h1=title
