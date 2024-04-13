@@ -10,6 +10,11 @@ const userSchema = new Schema({
 		type: String,
 		required: [true, "Please enter a valid password"],
 	},
+	status: {
+		type: Boolean,
+		default: false,
+		required: true	
+	}
 });
 
 module.exports = mongoose.model("User", userSchema);

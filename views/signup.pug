@@ -1,13 +1,6 @@
 extends layout 
 
 block content
-    div.navbar-group
-        a(href="/")
-            h1="ChatterZone"
-        div.button-group
-            button.log-in(onClick="location.href='/login'") Log in
-            button.sign-up(onClick="location.href='/signup'") Sign up
-
     div.sign-up-form
         h1=title
         form(method="POST" action="/signup")

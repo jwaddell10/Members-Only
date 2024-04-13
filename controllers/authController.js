@@ -31,6 +31,7 @@ exports.loginPost = [
 		}
 
 		passport.authenticate("local", (err, user, info) => {
+            console.log(user, 'this is user')
 			if (err) {
 				return next(err);
 			}
@@ -104,9 +105,8 @@ exports.signupPost = [
 					password: hashedPassword,
 				});
 
-				const result = await user.save();
+				await user.save();
 
-				console.log(result, "this is result");
 				res.redirect("/");
 			});
 		} catch (err) {

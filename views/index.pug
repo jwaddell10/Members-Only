@@ -1,17 +1,14 @@
 extends layout
 
 block content
-  div.navbar-group
-    a(href="/")
-      h1= title
-    div.button-group
-      button.log-in(onClick="location.href='/login'") Log in
-      button.sign-up(onClick="location.href='/signup'") Sign up
-
-  div.homepage-group
-    h1 You must be logged in to Chatter
-    div.homepage-button-group
-      button.log-in(onClick="location.href='/login'") Log in
-      button.sign-up(onClick="location.href='/signup'") Sign up
+  if user 
+    if user.status === true
+      p Welcome #{user.username}
+  else
+    .homepage-group
+      h1 You must be logged in to Chatter
+      .homepage-button-group
+        button.log-in(onclick="location.href='/login'") Log in
+        button.sign-up(onclick="location.href='/signup'") Sign up
 
 

@@ -1,16 +1,14 @@
 extends layout 
 
 block content 
-    div.navbar-group
-        a(href="/")
-            h1="ChatterZone"
-        div.button-group
-            button.log-in(onClick="location.href='/login'") Log in
-            button.sign-up(onClick="location.href='/signup'") Sign up
     if user 
         h1 Welcome Back #{user.username}!
         div.flexjustifycenter
             button.log-out(onClick="location.href='/logout'") Log Out
+
+        if (user.status === false)
+            a(href="/profile")
+                p.user.status="Not a member? Click to join."
     else
         div.login-form
             h1=title

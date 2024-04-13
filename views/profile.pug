@@ -1,0 +1,14 @@
+extends layout 
+
+block content
+
+    h1=title
+    form(method="POST" action="/profile")
+        p="Do you know the secret password?"
+        div.form-group
+            label(for="clubpassword") Club Password:
+        div.input-group
+            input(type="password" name="clubpassword")
+
+        if errorMessage 
+            p= errorMessage
