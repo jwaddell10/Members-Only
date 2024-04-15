@@ -130,3 +130,7 @@ body > div.login-form > p {
   display: flex;
   justify-content: center;
 }
+
+.messages {
+  color: white;
+}

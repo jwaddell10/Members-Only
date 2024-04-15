@@ -30,11 +30,10 @@ async function messageCreate(index, title, date, messageText, user) {
 	};
 
 	const message = new Message(newMessage);
-	console.log(message, "this is message to save");
 
 	await message.save();
 	messages[index] = message;
-	console.log(messages, "this is messages");
+	console.log(messages[0], "this is messages array");
 }
 
 async function userCreate(index, username, password) {
@@ -44,11 +43,10 @@ async function userCreate(index, username, password) {
 	};
 
 	const user = new User(newUser);
-	console.log(user, "this is user to save");
 
 	await user.save();
 	users[index] = user;
-	console.log(users, "this is users");
+	console.log(users[0], "this is users array");
 }
 
 async function createMessages() {
