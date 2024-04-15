@@ -1,14 +1,18 @@
-extends layout 
+extends layout
 
 block content
-
     h1=title
     form(method="POST" action="/profile")
-        p="Do you know the secret password?"
+        p Do you know the secret password?
         div.form-group
             label(for="clubpassword") Club Password:
-        div.input-group
-            input(type="password" name="clubpassword")
+            div.input-group
+                input(type="password" name="clubpassword")
+    form(method="POST" action="/profile")
+        div.form-group
+            label(for="adminpassword") Admin Password:
+            div.input-group
+                input(type="password" name="adminpassword")            
 
         if errorMessage 
             p= errorMessage

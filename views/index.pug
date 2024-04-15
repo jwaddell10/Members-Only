@@ -9,13 +9,19 @@ block content
     //-   if (user.status === false)
     //-     a(href="/profile")
     //-       p.user.status="Not a member? Click to join."
-  if messages.length > 0
     each message in messages
-      div.messages
-        | #{message.title}
-        | #{message.date_formatted}
-        | #{message.messageText}
-
+      if user.status === true
+        div.messages
+          | #{message.title}
+          | #{message.username}
+          | #{message.date_formatted}
+          | #{message.messageText}
+          if user.admin === true 
+            button.delete-button Delete
+      else
+        div.messages
+          | #{message.title}
+          | #{message.messageText}
 
   else
     .homepage-group
