@@ -11,8 +11,9 @@ block content
         if user.admin === true 
           button.delete-button Delete
     if user.status === true
+      #{user}
       div.create-message
-        form(method="POST" action="/createmessage")
+        form(method="POST" action="/message")
           div.create-message-group
             input(type="text" name="message" required)
 
