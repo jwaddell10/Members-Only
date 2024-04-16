@@ -13,10 +13,6 @@ router.get("/", async (req, res, next) => {
 	const allMessages = await Message.find({})
 		.populate("user")
 		.exec();
-	const allUsers = await User.find({}).exec();
-
-	console.log(allUsers, "this is allUsers");
-	console.log(allMessages, "this is messages in indexget");
 	res.render("index", { user: req.user, messages: allMessages });
 });
 

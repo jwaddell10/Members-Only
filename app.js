@@ -13,7 +13,6 @@ const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const User = require("./models/user");
 require("dotenv").config();
-const flash = require("req-flash");
 const app = express();
 
 main().catch((err) => console.log(err));
@@ -37,7 +36,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
 app.use(passport.session());
-app.use(flash());
 app.use(express.urlencoded({ extended: false }));
 
 app.use("/", indexRouter);
