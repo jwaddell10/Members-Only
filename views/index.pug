@@ -2,26 +2,19 @@ extends layout
 
 block content
   if user 
-    //- h1 Welcome Back #{user.username}!
-    //- div.flexjustifycenter
-    //-   button.log-out(onClick="location.href='/logout'") Log Out
-
-    //-   if (user.status === false)
-    //-     a(href="/profile")
-    //-       p.user.status="Not a member? Click to join."
     each message in messages
-      if user.status === true
-        div.messages
-          | #{message.title}
-          | #{message.username}
-          | #{message.date_formatted}
-          | #{message.messageText}
-          if user.admin === true 
-            button.delete-button Delete
-      else
-        div.messages
-          | #{message.title}
-          | #{message.messageText}
+      div.messages
+        | #{message.title}
+        | #{message.username}
+        | #{message.date_formatted}
+        | #{message.messageText}
+        if user.admin === true 
+          button.delete-button Delete
+    if user.status === true
+      div.create-message
+        form(method="POST" action="/createmessage")
+          div.create-message-group
+            input(type="text" name="message" required)
 
   else
     .homepage-group
@@ -29,3 +22,4 @@ block content
       .homepage-button-group
         button.log-in(onclick="location.href='/login'") Log in
         button.sign-up(onclick="location.href='/signup'") Sign up
+
