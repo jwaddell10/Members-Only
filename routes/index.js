@@ -9,7 +9,6 @@ const messageController = require('../controllers/messageController')
 
 /* GET home page. */
 router.get("/", async (req, res, next) => {
-	console.log(req.user, "this is requser");
 	const allMessages = await Message.find({})
 		.populate("user")
 		.exec();
@@ -28,5 +27,6 @@ router.get("/profile", userController.profileGet);
 router.post("/profile", userController.profilePost);
 
 router.post('/message', messageController.messagePost)
+router.post('/delete', messageController.messageDelete)
 
 module.exports = router;
