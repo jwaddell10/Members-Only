@@ -3,20 +3,26 @@ extends layout
 block content
   if user 
     each message in messages
-      div.messages
-        | #{message.title}
-        | #{message.username}
-        | #{message.date_formatted}
-        | #{message.messageText}
+      if user.status === true
+        div.messages
+          | #{user.username}
+          | #{message.date_formatted}
+          br
+          | #{message.messageText}
+        div.create-message
+          form(method="POST" action="/message")
+            div.create-message-group
+              input.message-input(type="text" name="messageText" placeholder="message..." required)
+              button.btn-primary(type='submit') Submit
         if user.admin === true 
           form(method="POST" action=`/delete/${message._id}`)
             button.delete-button(type="submit") Delete
-    if user.status === true
-      div.create-message
-        form(method="POST" action="/message")
-          div.create-message-group
-            input(type="text" name="messageText" placeholder="message..." required)
-            button.btn-primary(type='submit') Submit
+      else
+        div.messages
+          | #{message.title}
+          | #{message.username}
+          | #{message.date_formatted}
+          | #{message.messageText}
 
 
   else
