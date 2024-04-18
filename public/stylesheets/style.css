@@ -12,12 +12,7 @@ p {
 }
 
 input {
-  padding: 10px;
-  flex-grow: 1;
-  border-radius: 10px;
-  border: solid 1px #c3c3c3;
-  color: white;
-  background-color: #FFFFFF;
+  border-radius: 8px;
 }
 
 input:focus {
@@ -147,6 +142,11 @@ body > div.login-form > p {
 
 .messages {
   color: white;
+  border: 1px solid white;
+  border-radius: 5px;
+  margin: 1rem;
+  padding: 1rem;
+  font-size: 14px;
 }
 
 .create-message-group {
@@ -161,9 +161,17 @@ body > div.login-form > p {
 }
 
 .message-input {
-  border: 1px solid white;
+  padding: 10px;
+  flex-grow: 1;
+  border: solid 1px #c3c3c3;
+  color: white;
   border-radius: 10px;
   background-color: #222222;
   width: 90%;
   margin-right: 1rem;
+}
+
+.error-message {
+  display: flex;
+  justify-content: center;
 }

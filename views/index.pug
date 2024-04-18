@@ -19,10 +19,11 @@ block content
             button.delete-button(type="submit") Delete
       else
         div.messages
-          | #{message.title}
-          | #{message.username}
-          | #{message.date_formatted}
-          | #{message.messageText}
+          span.blue-text(style="font-size: 1.1em; color: #7CB9E8;") ******
+          |
+          | ******
+          div.messageText
+            | #{message.messageText}
 
 
   else

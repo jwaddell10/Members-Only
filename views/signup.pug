@@ -16,5 +16,7 @@ block content
                 label(for="password") Confirm Password: 
             div.input-group
                 input(type="password" name="passwordConfirmation" required)
+            if errorMessage 
+                p.error-message= errorMessage
             div.button
                 button.btn-primary(type='submit') Sign Up

@@ -55,16 +55,15 @@ exports.loginPost = [
 	}),
 ];
 
-
 exports.logout = (req, res, next) => {
-    console.log('is this running?')
-    req.logout((err) => {
-      if (err) {
-        return next(err);
-      }
-      res.redirect('/');
-    });
-  };
+	console.log("is this running?");
+	req.logout((err) => {
+		if (err) {
+			return next(err);
+		}
+		res.redirect("/");
+	});
+};
 
 exports.signupGet = asyncHandler(async (req, res, next) => {
 	res.render("signup", {
@@ -74,13 +73,21 @@ exports.signupGet = asyncHandler(async (req, res, next) => {
 
 exports.signupPost = [
 	asyncHandler(async (req, res, next) => {
-		const duplicate = await User.findOne({ username: req.body.username });
-		if (duplicate !== null) {
-			res.render("signup", {
-				title: "Sign-Up Form",
+		try {
+			const duplicate = await User.findOne({
+				username: req.body.username,
 			});
+			if (duplicate !== null) {
+				res.render("signup", {
+					title: "Sign-Up Form",
+					errorMessage: "User already exists",
+				});
+			} else {
+				next();
+			}
+		} catch (error) {
+			next(error); // Pass any caught errors to the error handling middleware
 		}
-		next();
 	}),
 
 	body("username").trim().isLength({ min: 1 }).escape(),
@@ -107,7 +114,6 @@ exports.signupPost = [
 				});
 
 				await user.save();
-
 				res.redirect("/");
 			});
 		} catch (err) {
