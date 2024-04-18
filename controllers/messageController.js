@@ -21,11 +21,11 @@ exports.messagePost = [
 			const createdMessage = new Message({
 				title: req.body.title,
 				messageText: req.body.messageText,
-                date: formattedDate,
+				date: formattedDate,
 			});
 
 			await createdMessage.save();
-            res.redirect("/")
+			res.redirect("/");
 		} catch (error) {
 			console.error("Error saving message:", error);
 			res.status(500).json({ error: "Internal server error" });
@@ -33,10 +33,13 @@ exports.messagePost = [
 	}),
 ];
 
-exports.messageDelete = asyncHandler(async(req, res, next) => {
-	const messageToDelete = await Message({})
-	console.log(messageToDelete, 'this is message to delete')
-	console.log(req.user, 'this is user')
-	console.log(req.message, 'this is message')
-	//there's a requser
-})
+exports.messageDelete = asyncHandler(async (req, res, next) => {
+	try {
+		const messageId = req.params.id
+		const messageToDelete = await Message.findByIdAndDelete(messageId)
+		console.log(messageToDelete, 'this message was deleted')
+		res.redirect("/")
+	} catch (error) {
+		throw new Error("message was not deleted");
+	}
+});

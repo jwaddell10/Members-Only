@@ -27,6 +27,6 @@ router.get("/profile", userController.profileGet);
 router.post("/profile", userController.profilePost);
 
 router.post('/message', messageController.messagePost)
-router.post('/delete', messageController.messageDelete)
+router.post('/delete/:id', messageController.messageDelete)
 
 module.exports = router;

@@ -9,7 +9,7 @@ block content
         | #{message.date_formatted}
         | #{message.messageText}
         if user.admin === true 
-          form(method="POST" action="/delete")
+          form(method="POST" action=`/delete/${message._id}`)
             button.delete-button(type="submit") Delete
     if user.status === true
       div.create-message

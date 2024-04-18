@@ -9,6 +9,10 @@ const messageSchema = new Schema({
 	user: { type: Schema.Types.ObjectId, ref: "User" },
 });
 
+messageSchema.virtual("url").get(function () {
+	return `/index/message/${this._id}`
+});
+
 messageSchema.virtual("date_formatted").get(function() {
     return DateTime.fromJSDate(this.date).toLocaleString(DateTime.DATE_MED);
 })
