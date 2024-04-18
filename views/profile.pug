@@ -1,18 +1,21 @@
 extends layout
 
 block content
-    h1=title
-    form(method="POST" action="/profile")
-        p Do you know the secret password?
-        div.form-group
-            label(for="clubpassword") Club Password:
+    div.profile-form
+        h1=title    
+        form(method="POST" action="/profile")
+            p.profile-form-message Enter club password to chat, admin password to delete messages.
+            div.form-group
+                label(for="clubpassword") Club Password:
             div.input-group
                 input(type="password" name="clubpassword")
-    form(method="POST" action="/profile")
-        div.form-group
-            label(for="adminpassword") Admin Password:
+        form(method="POST" action="/profile")
+            div.form-group
+                label(for="adminpassword") Admin Password:
             div.input-group
-                input(type="password" name="adminpassword")            
+                input(type="password" name="adminpassword")
+            div.button
+                button.btn-primary(type='submit') Join           
 
-        if errorMessage 
-            p= errorMessage
+            if errorMessage 
+                p= errorMessage
