@@ -134,3 +134,8 @@ body > div.login-form > p {
 .messages {
   color: white;
 }
+
+.create-message-group {
+  position: absolute;
+  bottom: 0px;
+}

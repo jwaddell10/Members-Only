@@ -7,7 +7,11 @@ html
       a(href="/")
         h1= "ChatterZone"
       div.button-group
-        button.log-in(onClick="location.href='/login'") Log in
-        button.sign-up(onClick="location.href='/signup'") Sign up
+        if user 
+          button.log-in(onClick="location.href='/logout'") Log out
+          button.sign-up(onClick="location.href='/signup'") Sign up
+        else
+          button.log-in(onClick="location.href='/login'") Log in
+          button.sign-up(onClick="location.href='/signup'") Sign up
   body
     block content
