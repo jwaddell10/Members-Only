@@ -142,11 +142,20 @@ body > div.login-form > p {
 
 .messages {
   color: white;
-  border: 1px solid white;
   border-radius: 5px;
   margin: 1rem;
   padding: 1rem;
   font-size: 14px;
+}
+
+.message-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid white;
+  border-radius: 8px;
+  margin: 5px;
+  padding-right: 1rem;
 }
 
 .create-message-group {
@@ -167,7 +176,6 @@ body > div.login-form > p {
   color: white;
   border-radius: 10px;
   background-color: #222222;
-  width: 90%;
   margin-right: 1rem;
 }
 
