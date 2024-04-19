@@ -201,3 +201,8 @@ body > div.login-form > p {
   display: flex;
   justify-content: center;
 }
+
+.delete-button {
+  background-color: #EA4C89;
+  color: #FFFFFF;
+}
