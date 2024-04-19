@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for chatter-zone0-fragrant-glitter-9008 on 2024-04-18T21:13:38-05:00
+# fly.toml app configuration file generated for chatter-zone on 2024-04-19T16:30:32-05:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'chatter-zone0-fragrant-glitter-9008'
+app = 'chatter-zone'
 primary_region = 'dfw'
 
 [build]
