@@ -6,7 +6,6 @@ require("dotenv").config();
 const asyncHandler = require("express-async-handler");
 
 exports.messagePost = [
-	body("title").notEmpty().withMessage("Title is required"),
 	body("messageText").notEmpty().withMessage("Message is required"),
 
 	asyncHandler(async (req, res, next) => {
@@ -19,10 +18,11 @@ exports.messagePost = [
 			const formattedDate = new Date().toISOString();
 
 			const createdMessage = new Message({
-				title: req.body.title,
 				messageText: req.body.messageText,
 				date: formattedDate,
 			});
+
+			console.log(createdMessage, 'this message created')
 
 			await createdMessage.save();
 			res.redirect("/");

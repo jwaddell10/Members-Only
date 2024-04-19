@@ -9,13 +9,13 @@ block content
                 label(for="clubpassword") Club Password:
             div.input-group
                 input(type="password" name="clubpassword")
-        form(method="POST" action="/profile")
             div.form-group
                 label(for="adminpassword") Admin Password:
             div.input-group
                 input(type="password" name="adminpassword")
             div.button
-                button.btn-primary(type='submit') Join           
-
+                button.btn-primary(type='submit') Join
             if errorMessage 
                 p= errorMessage
+
+

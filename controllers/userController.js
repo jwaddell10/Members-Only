@@ -19,10 +19,21 @@ exports.profilePost = asyncHandler(async (req, res, next) => {
 		const userEnteredAdminPassword = req.body.adminpassword;
 		const correctClubPassword = process.env.club_password;
 		const correctAdminPassowrd = process.env.admin_password;
+		console.log(userEnteredAdminPassword, 'this is admin')
+		console.log(req.body, 'this is club')
 
 		if (userEnteredClubPassword === correctClubPassword) {
 			loggedInUser.status = true;
 			await User.updateOne({ _id: loggedInUser._id }, { status: true });
+			console.log(loggedInUser, 'this is loggedinuser')
+			if (userEnteredAdminPassword === correctAdminPassowrd) {
+				loggedInUser.admin = true;
+				console.log(loggedInUser, 'this is admin user')
+				await User.updateOne(
+					{ _id: loggedInUser._id },
+					{ admin: true }
+				);
+			}
 			return res.redirect("/");
 		}
 
@@ -30,14 +41,10 @@ exports.profilePost = asyncHandler(async (req, res, next) => {
 			title: "Profile",
 			errorMessage: "Incorrect club password. Please try again.",
 		});
-
-		if (userEnteredAdminPassword === correctAdminPassowrd) {
-			loggedInUser.admin = true;
-			await User.updateOne({ _id: loggedInUser._id }, { admin: true });
-		}
 	} catch (error) {
 		next(error);
 	}
 });
+
 //second profile?
 //add another signup page, secret password = social worker, the other is members only
