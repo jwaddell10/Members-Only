@@ -28,7 +28,7 @@ input:focus {
 button {
   display: flex;
   justify-content: center;
-  border-radius: 0.5rem;
+  border-radius: 1rem;
   border-style: none;
   cursor: pointer;
   display: inline-block;
@@ -129,6 +129,9 @@ h1 {
 }
 
 .login-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: 1px solid white;
   border-radius: 10px;
   padding-bottom: 5px;
