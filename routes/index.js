@@ -9,7 +9,7 @@ const messageController = require('../controllers/messageController')
 /* GET home page. */
 router.get("/", async (req, res, next) => {
     try {
-        const allMessages = await Message.find({}).populate("user").exec();
+		const allMessages = await Message.find({}).maxTimeMS(30000).populate("user").exec();
         res.render("index", { user: req.user, messages: allMessages });
     } catch (error) {
         console.error("Error fetching messages:", error);
