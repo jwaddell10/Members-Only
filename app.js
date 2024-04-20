@@ -12,9 +12,7 @@ const bcrypt = require("bcryptjs");
 const indexRouter = require("./routes/index");
 const User = require("./models/user");
 require("dotenv").config({ path: ".env" });
-const compression = require("compression");
 const app = express();
-const helmet = require("helmet");
 
 main().catch((err) => console.log(err));
 
@@ -28,28 +26,6 @@ async function main() {
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
-app.set("trust proxy", 1);
-const RateLimit = require("express-rate-limit");
-const limiter = RateLimit({
-	windowMs: 1 * 60 * 1000, // 1 minute
-	max: 20,
-});
-// Apply rate limiter to all requests
-app.use(limiter);
-app.use(
-	helmet.contentSecurityPolicy({
-		directives: {
-			"script-src": ["'self'", "code.jquery.com", "cdn.jsdelivr.net"],
-		},
-	})
-);
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-	console.log(`Server running on port ${PORT}`);
-});
-
-app.use(compression()); // Compress all routes
 
 app.use(logger("dev"));
 app.use(express.json());

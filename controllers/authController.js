@@ -4,7 +4,6 @@ const passport = require("passport");
 const bcrypt = require("bcryptjs");
 const LocalStrategy = require("passport-local").Strategy;
 const crypto = require("crypto");
-const Message = require("../models/message");
 const User = require("../models/user");
 
 exports.loginGet = asyncHandler(async (req, res, next) => {
