@@ -10,9 +10,8 @@ const LocalStrategy = require("passport-local").Strategy;
 const Schema = mongoose.schema;
 const bcrypt = require("bcryptjs");
 const indexRouter = require("./routes/index");
-const usersRouter = require("./routes/users");
 const User = require("./models/user");
-require("dotenv").config();
+require("dotenv").config({ path: '.env'});
 const compression = require("compression");
 const app = express();
 const helmet = require("helmet");
@@ -20,12 +19,11 @@ const helmet = require("helmet");
 main().catch((err) => console.log(err));
 
 async function main() {
-	const mongoDB = process.env.MONGODB_KEY;
+	const mongoDB = process.env.MONGODB_URI;
 	const db = mongoose.connection;
 	db.on("error", console.error.bind(console, "mongo connection error"));
 
 	await mongoose.connect(mongoDB);
-	console.log("Should be connected");
 }
 // view engine setup
 app.set("views", path.join(__dirname, "views"));

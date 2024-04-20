@@ -56,7 +56,6 @@ exports.loginPost = [
 ];
 
 exports.logout = (req, res, next) => {
-	console.log("is this running?");
 	req.logout((err) => {
 		if (err) {
 			return next(err);

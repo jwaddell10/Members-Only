@@ -19,16 +19,12 @@ exports.profilePost = asyncHandler(async (req, res, next) => {
 		const userEnteredAdminPassword = req.body.adminpassword;
 		const correctClubPassword = process.env.club_password;
 		const correctAdminPassowrd = process.env.admin_password;
-		console.log(userEnteredAdminPassword, 'this is admin')
-		console.log(req.body, 'this is club')
 
 		if (userEnteredClubPassword === correctClubPassword) {
 			loggedInUser.status = true;
 			await User.updateOne({ _id: loggedInUser._id }, { status: true });
-			console.log(loggedInUser, 'this is loggedinuser')
 			if (userEnteredAdminPassword === correctAdminPassowrd) {
 				loggedInUser.admin = true;
-				console.log(loggedInUser, 'this is admin user')
 				await User.updateOne(
 					{ _id: loggedInUser._id },
 					{ admin: true }
