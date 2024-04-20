@@ -94,8 +94,9 @@ button {
   border: 1px solid white;
   border-radius: 10px;
   padding-bottom: 5px;
-  max-width: 300px;
-  margin: 0 auto;
+  max-width: 30rem;
+  height: 75vh;
+  margin: 10rem auto;
 }
 
 h1 {
@@ -129,14 +130,12 @@ h1 {
 }
 
 .login-form {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   border: 1px solid white;
   border-radius: 10px;
   padding-bottom: 5px;
-  max-width: 300px;
-  margin: 0 auto;
+  max-width: 30rem;
+  height: 75vh;
+  margin: 10rem auto;
 }
 body > div.login-form > p {
   display: flex;
