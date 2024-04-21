@@ -4,8 +4,6 @@ const User = require("../models/user");
 require("dotenv").config();
 const asyncHandler = require("express-async-handler");
 
-//sign-up form to create user
-
 exports.profileGet = asyncHandler(async (req, res, next) => {
 	res.render("profile", {
 		title: "Profile",
@@ -30,27 +28,19 @@ exports.profilePost = asyncHandler(async (req, res, next) => {
 					{ _id: loggedInUser._id },
 					{ admin: true }
 				);
-			} else {
-				// If user entered correct club password but incorrect admin password,
-				// update user status and skip displaying the error message
-				return res.redirect("/");
 			}
+			return res.redirect("/");
 		} else {
-			// If club password is incorrect, render error message
-			res.render("profile", {
-				title: "Profile",
-				errorMessage: "Incorrect club password. Please try again.",
-			});
-			return;
-		}
+			if (userEnteredClubPassword !== correctClubPassword) {
+				return res.render("profile", {
+					title: "Profile",
+					errorMessage: "Incorrect club password. Please try again.",
+				});
+			}
 
-		// Redirect to home page if both passwords are correct
-		res.redirect("/");
+			return res.redirect("/");
+		}
 	} catch (error) {
 		next(error);
 	}
 });
-
-
-//second profile?
-//add another signup page, secret password = social worker, the other is members only

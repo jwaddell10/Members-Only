@@ -6,7 +6,6 @@ const userController = require("../controllers/userController");
 const authController = require("../controllers/authController");
 const messageController = require('../controllers/messageController')
 
-/* GET home page. */
 router.get("/", async (req, res, next) => {
     try {
 		const allMessages = await Message.find({}).maxTimeMS(30000).populate("user").exec();

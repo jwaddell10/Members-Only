@@ -84,7 +84,7 @@ exports.signupPost = [
 				next();
 			}
 		} catch (error) {
-			next(error); // Pass any caught errors to the error handling middleware
+			next(error);
 		}
 	}),
 
