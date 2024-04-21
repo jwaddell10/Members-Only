@@ -6,7 +6,7 @@ const messageSchema = new Schema({
 	// title: { type: String, required: [true, "Please enter a title"] },
 	date: { type: Date, default: Date.now },
 	messageText: { type: String, required: [true, "Please enter a message"] },
-	user: { type: Schema.Types.ObjectId, ref: "User" },
+	user: { type: Schema.Types.ObjectId, ref: "User", required: true, },
 });
 
 messageSchema.virtual("url").get(function () {

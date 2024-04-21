@@ -6,7 +6,7 @@ block content
       div.message-container
         if user.status === true
           div.messages
-            | #{user.username}
+            | #{message.user.username}
             | #{message.date_formatted}
             br
             | #{message.messageText}

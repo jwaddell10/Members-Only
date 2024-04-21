@@ -1,5 +1,6 @@
 const { body, validationResult } = require("express-validator");
 const Message = require("../models/message");
+const User = require("../models/user")
 const { DateTime } = require("luxon");
 require("dotenv").config();
 const asyncHandler = require("express-async-handler");
@@ -15,10 +16,12 @@ exports.messagePost = [
 			}
 
 			const formattedDate = new Date().toISOString();
+			const user = await User.findById(req.user._id);
 
 			const createdMessage = new Message({
 				messageText: req.body.messageText,
 				date: formattedDate,
+				user: user,
 			});
 
 			await createdMessage.save();
