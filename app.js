@@ -24,7 +24,7 @@ async function main() {
 	await mongoose.connect(mongoDB);
 }
 // view engine setup
-app.set("views", path.join(__dirname, "views"));
+app.set("views", path.join(__dirname, "/views"));
 app.set("view engine", "pug");
 
 app.use(logger("dev"));
@@ -89,6 +89,13 @@ passport.deserializeUser(async (id, done) => {
 	} catch (err) {
 		done(err);
 	}
+});
+
+// Use PORT provided in environment or default to 3000
+const port = process.env.PORT || 3000;
+
+// Listen on `port` and 0.0.0.0
+app.listen(port, "0.0.0.0", function () {
 });
 
 module.exports = app;
