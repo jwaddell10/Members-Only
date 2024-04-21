@@ -166,8 +166,8 @@ body > div.login-form > p {
   display: flex;
   justify-content: center;
   padding: 0.5rem;
-  position: absolute;
-  bottom: 0px;
+  position: sticky;
+  bottom: 0;
 }
 
 .message-input {
