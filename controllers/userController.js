@@ -24,28 +24,33 @@ exports.profilePost = asyncHandler(async (req, res, next) => {
 			loggedInUser.status = true;
 			await User.updateOne({ _id: loggedInUser._id }, { status: true });
 
-			// Check if the admin password is correct
 			if (userEnteredAdminPassword === correctAdminPassword) {
 				loggedInUser.admin = true;
 				await User.updateOne(
 					{ _id: loggedInUser._id },
 					{ admin: true }
 				);
+			} else {
+				// If user entered correct club password but incorrect admin password,
+				// update user status and skip displaying the error message
+				return res.redirect("/");
 			}
-
-			// Redirect to the appropriate page
-			return res.redirect("/");
 		} else {
-			// If club password is incorrect, show an error message
+			// If club password is incorrect, render error message
 			res.render("profile", {
 				title: "Profile",
 				errorMessage: "Incorrect club password. Please try again.",
 			});
+			return;
 		}
+
+		// Redirect to home page if both passwords are correct
+		res.redirect("/");
 	} catch (error) {
 		next(error);
 	}
 });
+
 
 //second profile?
 //add another signup page, secret password = social worker, the other is members only
