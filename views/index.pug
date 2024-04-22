@@ -2,46 +2,39 @@ extends layout
 
 block content
   if user
-    if user.status === false
+    if !user.status
       div.message-container
         a(href="/profile")
-          p.user-status="Become a member to chat. Click here to join."
-    div.message-container 
-      each message in messages
-        div.single-message-container
-          if user.status === true
-            div.messages
-              | User:
-              | #{message.user.username}
-              br
-              | Date Posted:
-              | #{message.date_formatted}
-              br
-              | #{message.messageText}
-            if user.admin === true  
-              form(method="POST" action=`/delete/${message._id}`)
-                button.delete-button(type="submit") Delete
-          else
-            div.messages
-              span.blue-text(style="font-size: 1.1em; color: #7CB9E8;") ******
-              |
-              | ******
-              div.messageText
+          p.user-status Become a member to chat. Click here to join.
+      div.message-container 
+        each message in messages
+          div.single-message-container
+            if user.status
+              div.messages
+                | User: #{message.user.username}
+                br
+                | Date Posted: #{message.date_formatted}
+                br
                 | #{message.messageText}
-      if user.status === true
-        div.create-message
-          form(method="POST" action="/message")
-            div.create-message-group
-              input.message-input(type="text" name="messageText" placeholder="message..." required)
-              button.btn-primary(type='submit') Chatter
+              if user.admin
+                form(method="POST", action=`/delete/${message._id}`)
+                  button.delete-button(type="submit") Delete
+            else
+              div.messages
+                span.blue-text(style="font-size: 1.1em; color: #7CB9E8;") ******
+                |
+                | ******
+                div.messageText
+                  | #{message.messageText}
+        if user.status
+          div.create-message
+            form(method="POST" action="/message")
+              div.create-message-group
+                input.message-input(type="text" name="messageText" placeholder="message...", required)
+                button.btn-primary(type="submit") Chatter
   else
     .homepage-group
       h1 You must be logged in to Chatter
       .homepage-button-group
         button.log-in(onclick="location.href='/login'") Log in
         button.sign-up(onclick="location.href='/signup'") Sign up
-
-
-
-
-
