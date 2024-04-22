@@ -2,6 +2,10 @@ extends layout
 
 block content
   if user
+    if user.status === false
+      div.message-container
+        a(href="/profile")
+          p.user-status="Become a member to chat. Click here to join."
     div.message-container 
       each message in messages
         div.single-message-container
@@ -30,10 +34,6 @@ block content
             div.create-message-group
               input.message-input(type="text" name="messageText" placeholder="message..." required)
               button.btn-primary(type='submit') Chatter
-      if user.status === false
-        div.message-container
-          a(href="/profile")
-            p.user-status="Become a member to chat. Click here to join."
   else
     .homepage-group
       h1 You must be logged in to Chatter
